@@ -9,14 +9,17 @@ install.packages("EML")
 install.packages("emld") #an effective back-end for other 'R'-based tools working with 'EML
 
 # Load Packages
+library(EML)
+library(emld)
+
 
 # Starting our EML Record
 # Describing the Coverage (Temporal and Geographic)
 
-geographicDescription <- 
+geographicDescription <- "Loma del Mulhacen, Sierra Nevada, Andalucia, Spain"
 
 coverage <- 
-  set_coverage(begin = , end = ,
+  set_coverage(begin = "2015-07-01", end = "2015-07-31",
                geographicDescription = geographicDescription,
                west = -3.30, east = 3.30, 
                north = 37.05, south = 37.05,
@@ -24,36 +27,47 @@ coverage <-
                altitudeUnits = "meter")
 
 # Methods
-# You may copy it or call the .md file
+methods_file <- "./week6/methods.md"
+methods <- set_methods(methods_file)
+
+lospacio <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "Gianalberto", #first name
+    surName = "Losapio"), #last name
+    electronicMailAddress = "losapiog@stanford.edu")
+
+# Publisher
+publisher <- "Stanford University"
+
+# Publication Date
+pubDay <- "2021"
+
+# Title
+title <- "Plant-pollinator observations for: An experimental approach to assessing the 
+  impact of ecosystem engineers on biodiversity and ecosystem functions"
+
+# Contact Info  
+contact <- list(
+  individualName = gianalberto$individualName,
+  electronicMailAddress = gianalberto$electronicMailAddress,
+  organizationName = "Stanford University"
+)
+
+
+# Abstract
+abstract_file <- "./abstract.md"
+abstract_set <- set_TextType(abstract_file)
+
+# Licensing and Rights
+intellectualRights <- "Creative Commons CCO License"
 
 # Creating parties
 
 # Persons and Organizations appear in multiple places in and EML document. R has a native object class R_person
 
-
-# Publisher
-  
-  
-# Contact Info  
- 
-
 # Time for some keywords! As we learned these are important for findability.
 # We will create a keywordSet which is essentially a list of lists
 # We may also refer to controlled vocabularies and specific thesaurus for terms such as LTER's (https://vocab.lternet.edu/)
-
-
-# Publication Date
-    
-
-# Title
-
-
-# Abstract
-# You may copy it or call the .md file
-
-
-
-# Licensing and Rights
 
 
 # Time to create our dataset element!
@@ -80,3 +94,7 @@ eml <- list(
 # Wait! We are missing the attribute metadata at the file-level which is the heart of an EML dataset record!
 # We will work on a separate script file (dataTable).
 # Make sure to copy it here when ready, and add the dataTable to the elements's list before re-running the code.
+
+
+
+
